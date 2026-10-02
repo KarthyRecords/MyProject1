@@ -1,0 +1,13 @@
+name: Test EKS runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello:
+    runs-on: self-hosted
+    steps:
+      - name: Say hello
+        run: |
+          echo "Running on: $(hostname)"
+          uname -a
