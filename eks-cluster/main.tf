@@ -1,15 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket         = "teracotta-terraform-state"
-    key            = "cluster/terraform.tfstate"
-    region         = "eu-west-1"
-    dynamodb_table = "teracotta-terraform-locks"
-  }
-}
-
-provider "aws" {
-  region = "eu-west-1"
-}
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
@@ -18,8 +6,8 @@ module "eks" {
   cluster_name    = "teracotta"
   cluster_version = "1.30"
 
-  vpc_id     = "YOUR_VPC_ID"
-  subnet_ids = ["YOUR_SUBNET_ID_1", "YOUR_SUBNET_ID_2"]
+  vpc_id     = data.aws_vpc.main.id
+  subnet_ids = [data.aws_subnet.subnet1.id, data.aws_subnet.subnet2.id]
 
   eks_managed_node_groups = {
     system = {
@@ -77,10 +65,12 @@ resource "helm_release" "cert_manager" {
   namespace        = "cert-manager"
   create_namespace = true
 
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
+  set = [
+    {
+      name  = "installCRDs"
+      value = "true"
+    }
+  ]
 }
 
 resource "helm_release" "arc" {
@@ -90,15 +80,19 @@ resource "helm_release" "arc" {
   namespace        = "actions-runner-system"
   create_namespace = true
 
-    set {
-        name  = "authSecret.create"
-        value = "true"
+  set = [
+    {
+      name  = "authSecret.create"
+      value = "true"
     }
+  ]
 
-    set_sensitive {
-    name  = "authSecret.github_token"
-    value = var.github_token
-  }
+  set_sensitive = [
+    {
+      name  = "authSecret.github_token"
+      value = data.aws_ssm_parameter.github_token.value
+    }
+  ]
 
   depends_on = [helm_release.cert_manager]
 }
