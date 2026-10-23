@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "teracotta-terraform-state"
+  bucket = "terracotta-terraform-state"
 
   lifecycle {
     prevent_destroy = true
