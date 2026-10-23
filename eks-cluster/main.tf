@@ -80,16 +80,19 @@ resource "helm_release" "arc" {
   namespace        = "actions-runner-system"
   create_namespace = true
 
-    set = [
-  {
-    name  = "authSecret.create"
-    value = "true"
-  },
-  {
-    name  = "authSecret.github_token"
-    value = data.aws_ssm_parameter.github_token.value
-  }
-]
+  set = [
+    {
+      name  = "authSecret.create"
+      value = "true"
+    }
+  ]
+
+  set_sensitive = [
+    {
+      name  = "authSecret.github_token"
+      value = data.aws_ssm_parameter.github_token.value
+    }
+  ]
 
   depends_on = [helm_release.cert_manager]
 }
