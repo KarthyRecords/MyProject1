@@ -1,0 +1,64 @@
+name: readme-status
+
+# Opens a pull request that updates the STATUS section of README.md.
+# Triggers are limited to things only you do: merging to main, a weekly schedule, or a manual run.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - README.md        # merging the status PR must not start another run
+  schedule:
+    - cron: "0 7 * * 1"  # Mondays 07:00 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: readme-status
+  cancel-in-progress: true
+
+permissions:
+  contents: write        # push the status branch
+  pull-requests: write   # open the pull request
+  models: read           # call GitHub Models with the built-in token
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Draft the new status text
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+        run: python3 .github/agent/readme_status.py
+
+      - name: Check that only the STATUS section changed
+        run: python3 .github/agent/check_diff.py
+
+      - name: Open or update the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet README.md; then
+            echo "No status change, nothing to propose."
+            exit 0
+          fi
+          git config user.name "readme-status-agent"
+          git config user.email "readme-status-agent@users.noreply.github.com"
+          git checkout -B status/readme-update
+          git add README.md
+          git commit -m "docs: update README status"
+          git push --force origin status/readme-update
+          existing=$(gh pr list --head status/readme-update --state open --json number --jq '.[0].number')
+          if [ -z "$existing" ]; then
+            gh pr create --base main --head status/readme-update \
+              --title "docs: update README status" \
+              --body "Automated status update. Only the text between the STATUS markers changed. Please check the Goal and Where I am now lines, which are inferred."
+          else
+            echo "Pull request #$existing already open and now updated."
+          fi
