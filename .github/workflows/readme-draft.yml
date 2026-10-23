@@ -1,0 +1,43 @@
+name: readme-draft
+
+# Manual only. Writes README.draft.md and opens a pull request so you review it.
+# It never overwrites README.md.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  models: read
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Draft the README
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+        run: python3 .github/agent/readme_draft.py
+
+      - name: Open the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "readme-draft-agent"
+          git config user.email "readme-draft-agent@users.noreply.github.com"
+          git checkout -B docs/readme-draft
+          git add README.draft.md
+          git commit -m "docs: README draft"
+          git push --force origin docs/readme-draft
+          existing=$(gh pr list --head docs/readme-draft --state open --json number --jq '.[0].number')
+          if [ -z "$existing" ]; then
+            gh pr create --base main --head docs/readme-draft \
+              --title "docs: README draft for review" \
+              --body "Generated from the repo's files. Check every command and claim before using it. Items marked TODO need your input."
+          fi

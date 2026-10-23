@@ -1,0 +1,21 @@
+name: agent-tests
+
+on:
+  pull_request:
+    paths:
+      - ".github/agent/**"
+  push:
+    branches: [main]
+    paths:
+      - ".github/agent/**"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s .github/agent/tests -v
