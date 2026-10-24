@@ -57,7 +57,17 @@ def chat(system, user, max_tokens=1200, temperature=0.2, retries=3, timeout=60):
     for attempt in range(1, retries + 1):
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
-                data = json.load(response)
+                raw = response.read()
+                status = getattr(response, "status", "?")
+                final_url = getattr(response, "url", base)
+            try:
+                data = json.loads(raw)
+            except ValueError:
+                snippet = raw[:200].decode("utf-8", "replace")
+                raise LLMError(
+                    "provider returned non-JSON (HTTP %s from %s, %d bytes): %r"
+                    % (status, final_url, len(raw), snippet)
+                ) from None
             return data["choices"][0]["message"]["content"].strip()
         except urllib.error.HTTPError as err:
             retryable = err.code in (429, 500, 502, 503, 504)
