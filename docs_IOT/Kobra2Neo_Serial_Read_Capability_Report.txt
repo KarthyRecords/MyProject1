@@ -1,0 +1,286 @@
+==============================================================================
+Kobra 2 Neo serial capability report   (v02)
+2026-10-24 15:00:54   port COM3   PRINTING
+Board reset when the port opened: no
+==============================================================================
+
+Live state
+----------
+[ OK ] M105     Hotend/bed temperature + target             T:219.35 /220.00 B:61.40 /60.00 @:42 B@:29
+[ OK ] M105     Heater power (@: / B@:)                     T:219.47 /220.00 B:61.38 /60.00 @:40 B@:34
+[ OK ] M114     X/Y/Z/E planned position                    X:129.45 Y:105.73 Z:0.20 E:24.25 Count X:10356 Y:8459 Z:97
+[ OK ] M114     Stepper counts (actual motor position)      X:129.45 Y:107.03 Z:0.20 E:24.72 Count X:10356 Y:8563 Z:98
+[ OK ] M27      SD print progress (bytes)                   SD printing byte 16207/248792
+[ OK ] M27 C    File being printed                          Current file: 00_specon_pin_v2_1pc_PLA_6m28s...
+[ OK ] M31      Elapsed print time                          Print time: 28s
+[ OK ] M220     Speed override %                            FR:100%
+[ OK ] M221     Flow override %                             E0 Flow: 100%
+[ OK ] M119     Endstops / filament sensor                  x_min: open, y_min: open, z_min: TRIGGERED, z_max: open, fila...
+[ OK ] M412     Filament runout detection on/off            Filament runout ON
+[ OK ] M211     Software endstops on/off                    M211 S1 ; ON
+
+Setup
+-----
+[ OK ] M115     Firmware info + capability list             Marlin bugfix-2.1.x (Aug 16 2023 15:33:11)
+[ OK ] M503     All saved settings                          M92 X80.00 Y80.00 Z400.00 E455.00
+[ OK ] M301     Hotend PID                                  M301 P14.42 I0.88 D59.12
+[ OK ] M304     Bed PID                                     M304 P97.10 I1.41 D1675.16
+[ OK ] M851     Probe offset                                M851 X24.00 Y13.35 Z-1.41 ; (mm)
+[ OK ] M900     Linear advance K                            Advance K=0.06
+[ OK ] M420 V   Bed levelling mesh                          5 mesh rows
+[ OK ] M290     Babystep / Z offset                         Probe Offset Z-1.41
+[skip] M20 L    SD card file list                           skipped while printing
+[ -- ] M78      Lifetime print statistics
+[ -- ] M122     Stepper driver status (TMC)
+[ -- ] M906     Motor currents (TMC)
+[ -- ] M123     Fan tachometer speed
+
+Auto-report
+-----------
+[ OK ] M155 S1  Temperatures pushed automatically           4 reports in 4 s
+[ -- ] M154 S1  Position pushed automatically
+[ ?? ] M27 S1   SD progress pushed automatically            0 reports in 4 s
+
+Echo
+----
+[ OK ] M111 S1  Echo of commands sent over USB
+[ OK ] M111 S1  Echo of commands from SD (during print)     29 SD lines in 5 s, e.g. G1 X114.253 Y113.951 E.41853
+
+Summary: OK 23,  SKIPPED 1,  NOT SUPPORTED 5,  NO DATA 1
+[ OK ] works   [ -- ] not in this firmware   [ ?? ] replied but no data   [ !! ] no reply   [skip] skipped
+
+M115 capabilities ON : ARCS, AUTOLEVEL, AUTOREPORT_TEMP, BABYSTEPPING, EEPROM, EXTENDED_M20, LEVELING_DATA, LONG_FILENAME, PRINT_JOB, RUNOUT, SDCARD, SD_WRITE, THERMAL_PROTECTION, VOLUMETRIC, Z_PROBE
+M115 capabilities OFF: AUTOREPORT_POS, AUTOREPORT_SD_STATUS, BINARY_FILE_TRANSFER, BUILD_PERCENT, CASE_LIGHT_BRIGHTNESS, CHAMBER_TEMPERATURE, CONFIG_EXPORT, COOLER_TEMPERATURE, CUSTOM_FIRMWARE_UPLOAD, EMERGENCY_PARSER, HOST_ACTION_COMMANDS, LFN_WRITE, MEATPACK, MOTION_MODES, MULTI_VOLUME, PROGRESS, PROMPT_SUPPORT, REPEAT, SERIAL_XON_XOFF, SOFTWARE_POWER, TOGGLE_LIGHTS
+
+==============================================================================
+RAW REPLIES
+==============================================================================
+
+>>> M105
+ok T:219.35 /220.00 B:61.40 /60.00 @:42 B@:29
+
+>>> M105
+ok T:219.47 /220.00 B:61.38 /60.00 @:40 B@:34
+
+>>> M114
+X:129.45 Y:105.73 Z:0.20 E:24.25 Count X:10356 Y:8459 Z:97
+ok
+
+>>> M114
+X:129.45 Y:107.03 Z:0.20 E:24.72 Count X:10356 Y:8563 Z:98
+ok
+
+>>> M27
+SD printing byte 16207/248792
+ok
+
+>>> M27 C
+Current file: 00_JLR~1.GCO 00_JLR_specon_pin_v2_1pc_PLA_6m28s.gcode
+ok
+
+>>> M31
+echo:Print time: 28s
+ok
+
+>>> M220
+FR:100%
+ok
+
+>>> M221
+echo:E0 Flow: 100%
+ok
+
+>>> M119
+Reporting endstop status
+x_min: open
+y_min: open
+z_min: TRIGGERED
+z_max: open
+filament: TRIGGERED
+ok
+
+>>> M412
+echo:Filament runout ON
+ok
+
+>>> M211
+M211 S1 ; ON
+Min:  X-5.80 Y-1.00 Z0.00   Max:  X230.00 Y230.00 Z250.00
+ok
+
+>>> M115
+FIRMWARE_NAME:Marlin bugfix-2.1.x (Aug 16 2023 15:33:11) SOURCE_CODE_URL:github.com/MarlinFirmware/Marlin PROTOCOL_VERSION:1.0 MACHINE_TYPE:AnycubicKobra EXTRUDER_COUNT:1 UUID:cede2a2f-41a2-4748-9b12-c55c62f367ff
+Cap:SERIAL_XON_XOFF:0
+Cap:BINARY_FILE_TRANSFER:0
+Cap:EEPROM:1
+Cap:VOLUMETRIC:1
+Cap:AUTOREPORT_POS:0
+Cap:AUTOREPORT_TEMP:1
+Cap:PROGRESS:0
+Cap:PRINT_JOB:1
+Cap:AUTOLEVEL:1
+Cap:RUNOUT:1
+Cap:Z_PROBE:1
+Cap:LEVELING_DATA:1
+Cap:BUILD_PERCENT:0
+Cap:SOFTWARE_POWER:0
+Cap:TOGGLE_LIGHTS:0
+Cap:CASE_LIGHT_BRIGHTNESS:0
+Cap:EMERGENCY_PARSER:0
+Cap:HOST_ACTION_COMMANDS:0
+Cap:PROMPT_SUPPORT:0
+Cap:SDCARD:1
+Cap:MULTI_VOLUME:0
+Cap:REPEAT:0
+Cap:SD_WRITE:1
+Cap:AUTOREPORT_SD_STATUS:0
+Cap:LONG_FILENAME:1
+Cap:LFN_WRITE:0
+Cap:CUSTOM_FIRMWARE_UPLOAD:0
+Cap:EXTENDED_M20:1
+Cap:THERMAL_PROTECTION:1
+Cap:MOTION_MODES:0
+Cap:ARCS:1
+Cap:BABYSTEPPING:1
+Cap:CHAMBER_TEMPERATURE:0
+Cap:COOLER_TEMPERATURE:0
+Cap:MEATPACK:0
+Cap:CONFIG_EXPORT:0
+ok
+
+>>> M503
+echo:; Linear Units:
+echo:  G21 ; (mm)
+echo:; Temperature Units:
+echo:  M149 C ; Units in Celsius
+echo:; Filament settings (Disabled):
+echo:  M200 S0 D1.75
+echo:; Steps per unit:
+echo:  M92 X80.00 Y80.00 Z400.00 E455.00
+echo:; Max feedrates (units/s):
+echo:  M203 X300.00 Y300.00 Z8.00 E100.00
+echo:; Max Acceleration (units/s2):
+echo:  M201 X2000.00 Y2000.00 Z800.00 E2000.00
+echo:; Acceleration (units/s2) (P<print-accel> R<retract-accel> T<travel-accel>):
+echo:  M204 P300.00 R2000.00 T300.00
+echo:; Advanced (B<min_segment_time_us> S<min_feedrate> T<min_travel_feedrate> X<max_jerk> Y<max_jerk> Z<max_jerk> E<max_jerk>):
+echo:  M205 B20000.00 S0.00 T0.00 X10.00 Y10.00 Z2.00 E5.00
+echo:; Home offset:
+echo:  M206 X0.00 Y0.00 Z0.00
+echo:; Auto Bed Leveling:
+echo:  M420 S1 ; Leveling ON
+echo:  G29 W I0 J0 Z-0.68172
+echo:  G29 W I1 J0 Z-0.53272
+echo:  G29 W I2 J0 Z-0.36322
+echo:  G29 W I3 J0 Z-0.17772
+echo:  G29 W I4 J0 Z-0.01272
+echo:  G29 W I0 J1 Z-0.39872
+echo:  G29 W I1 J1 Z-0.27572
+echo:  G29 W I2 J1 Z-0.11772
+echo:  G29 W I3 J1 Z0.03128
+echo:  G29 W I4 J1 Z0.17328
+echo:  G29 W I0 J2 Z-0.14872
+echo:  G29 W I1 J2 Z-0.06772
+echo:  G29 W I2 J2 Z0.04428
+echo:  G29 W I3 J2 Z0.18928
+echo:  G29 W I4 J2 Z0.29578
+echo:  G29 W I0 J3 Z-0.01772
+echo:  G29 W I1 J3 Z0.02378
+echo:  G29 W I2 J3 Z0.12628
+echo:  G29 W I3 J3 Z0.25728
+echo:  G29 W I4 J3 Z0.35728
+echo:  G29 W I0 J4 Z0.01928
+echo:  G29 W I1 J4 Z0.03828
+echo:  G29 W I2 J4 Z0.14678
+echo:  G29 W I3 J4 Z0.27878
+echo:  G29 W I4 J4 Z0.37328
+echo:; Material heatup parameters:
+echo:  M145 S0 H180.00 B70.00 F0
+echo:  M145 S1 H240.00 B110.00 F0
+echo:; Hotend PID:
+echo:  M301 P14.42 I0.88 D59.12
+echo:; Bed PID:
+echo:  M304 P97.10 I1.41 D1675.16
+echo:; Power-loss recovery:
+echo:  M413 S1 ; ON
+echo:; Z-Probe Offset:
+echo:  M851 X24.00 Y13.35 Z-1.41 ; (mm)
+echo:; Input Shaping:
+echo:  M593 X F55.77 D0.15
+echo:  M593 Y F52.70 D0.15
+echo:; Linear Advance:
+echo:  M900 K0.06
+echo:; Filament load/unload:
+echo:  M603 L0.00 U100.00 ; (mm)
+echo:; Filament runout sensor:
+echo:  M412 S1 ; Sensor ON
+echo:; UI Language:
+echo:  M414 S0
+ok
+
+>>> M301
+M301 P14.42 I0.88 D59.12
+ok
+
+>>> M304
+M304 P97.10 I1.41 D1675.16
+ok
+
+>>> M851
+M851 X24.00 Y13.35 Z-1.41 ; (mm)
+ok
+
+>>> M900
+echo:Advance K=0.06
+ok
+
+>>> M420 V
+Bilinear Leveling Grid:
+0      1      2      3      4
+0 -0.682 -0.533 -0.363 -0.178 -0.013
+1 -0.399 -0.276 -0.118 +0.031 +0.173
+2 -0.149 -0.068 +0.044 +0.189 +0.296
+3 -0.018 +0.024 +0.126 +0.257 +0.357
+4 +0.019 +0.038 +0.147 +0.279 +0.373
+echo:Bed Leveling ON
+ok
+
+>>> M290
+echo:Probe Offset Z-1.41
+ok
+
+>>> M78
+echo:Unknown command: "M78"
+ok
+
+>>> M122
+echo:Unknown command: "M122"
+ok
+
+>>> M906
+echo:Unknown command: "M906"
+ok
+
+>>> M123
+echo:Unknown command: "M123"
+ok
+
+>>> M155 S1
+ok
+
+>>> M154 S1
+echo:Unknown command: "M154 S1"
+ok
+
+>>> M27 S1
+SD printing byte 20560/248792
+ok
+
+>>> M111 S1 + M31
+echo:G1 X115.553 Y113.951 E.41856
+echo:G1 X114.903 Y113.951 E.02438
+echo:G1 X107.006 Y106.054 E.41854
+echo:G1 X106.356 Y106.054 E.02437
+echo:M31
+echo:Print time: 45s
+ok
