@@ -18,8 +18,9 @@ def outside(text):
 
 
 def main():
-    status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True).stdout
-    changed = [line[3:] for line in status.splitlines()]
+    status = subprocess.run(["git", "status", "--porcelain", "--untracked-files=all"], capture_output=True, text=True, check=True).stdout
+    # Python's bytecode cache is a by-product of running the scripts, not a change.
+    changed = [line[3:] for line in status.splitlines() if "__pycache__/" not in line[3:]]
     if not changed:
         print("No changes.")
         return
