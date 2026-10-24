@@ -1,6 +1,11 @@
 # 3D printer remote-monitoring web app
 
-A hands-on DevOps project: an AWS EKS cluster built with Terraform, with GitHub Actions self-hosted runners on the cluster that deploy infrastructure and applications. The application is a 3D printer remote-monitoring web app, built to learn infrastructure design, CI/CD and operations end to end.
+A hands-on DevOps/IoT project to create a cloud based dashboard for our FDM 3D printer:
+1. IoT hardware:
+- [Phase 1] Serial port connection to the printer enabling read/command capability (Anycubic Kobra 2 Neo, Marlin based OEM Firmware)
+- [Phase 2] 2x ADXL345 accelerometers (on extruder and table), USB webcam connected via STM32 (Arduino Uno Q)
+2. Cloud dashboard:
+AWS EKS cluster built with Terraform, with GitHub Actions self-hosted runners on the cluster that deploy infrastructure and applications. 
 
 <!-- STATUS:START -->
 **Goal:** Goal not stated yet, add it to docs/status-notes.md  
