@@ -3,6 +3,25 @@
 A hands-on DevOps project: an AWS EKS cluster built with Terraform, with GitHub Actions self-hosted runners on the cluster that deploy infrastructure and applications. The application is a 3D printer remote-monitoring web app, built to learn infrastructure design, CI/CD and operations end to end.
 
 <!-- STATUS:START -->
+**Goal:** Goal not stated yet, add it to docs/status-notes.md  
+
+**Where I am now:** The repository now includes EKS cluster Terraform configuration, NAT egress for cluster subnets, DNS hostnames enabled for the VPC, and a repo‑agent integration with associated workflows and CODEOWNER. Recent work has focused on merging the repo‑agent feature and fixing the README status.  
+
+**In progress**
+- Integrating the repo agent (multiple PR merges #3‑#8)  
+- Updating the README status file  
+
+**Up next**
+- Bootstrap: remote state in S3  
+- Apply network and EKS cluster from the pipeline  
+- Deploy runners (infra‑runner, app‑runner) with separate IAM roles  
+- Build and push the app image to ECR  
+
+**Done recently**
+- Add repo agent (PR #8)  
+- Merge pull request #
+
+_Last updated by the status agent on 2026-10-24 using openai/gpt-oss-120b._
 <!-- STATUS:END -->
 
 ## Architecture
