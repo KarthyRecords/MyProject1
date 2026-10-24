@@ -51,7 +51,14 @@ def chat(system, user, max_tokens=1200, temperature=0.2, retries=3, timeout=60):
     }).encode()
     request = urllib.request.Request(
         base + "/chat/completions", data=body,
-        headers={"Content-Type": "application/json", "Authorization": "Bearer " + key},
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer " + key,
+            # Some providers sit behind Cloudflare, which blocks Python's default
+            # "Python-urllib" User-Agent with HTTP 403 "error code: 1010".
+            "User-Agent": "repo-agent/1.0 (+https://github.com)",
+        },
     )
     delay = 5.0
     for attempt in range(1, retries + 1):
